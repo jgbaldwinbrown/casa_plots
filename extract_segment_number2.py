@@ -25,7 +25,7 @@ def extract_with_regex(instream, outstream, ewasteregex, wasteregex, pureregex, 
 			eors = segmentmatch.group(2)
 			if not eors:
 				eors = segmentmatch.group(4)
-			outstream.write(stripped_line + " " + eors.lower() + segmentmatch.group(6) + "\n")
+			outstream.write(stripped_line + " " + eors.lower() + segmentmatch.group(6) + segmentmatch.group(7) + "\n")
 			continue
 
 		exit("This is impossible!")
@@ -34,7 +34,7 @@ def main():
 	ewasteregex = re.compile("""[Ee][Ww]aste""")
 	wasteregex = re.compile("""[Ww]aste""")
 	pureregex = re.compile("""[Uu]nloaded|pure""")
-	segmentregex = re.compile("""(([Ee])(xtracted)?|([Ss])(egment)?)([1-6])""")
+	segmentregex = re.compile("""(([Ee])(xtracted)?|([Ss])(egment)?)([1-6])([Cc]?)""")
 	extract_with_regex(sys.stdin, sys.stdout, ewasteregex, wasteregex, pureregex, segmentregex)
 
 if __name__ == "__main__":
